@@ -1,1 +1,127 @@
+public class Node {
+    int data;
+    Node next;
+}
+public class LinkedList {
 
+    Node head ;
+
+       public void insert(int i) {
+
+            Node n = new Node();
+            n.data = i;
+            n.next = null;
+            if (head==null)
+            {
+                head = n;
+            }
+            else
+            {
+                Node temp=head;
+               // temp = head;
+                while(temp.next!=null)
+                {
+                    temp = temp.next;
+                }
+                temp.next=n;
+            }
+        }
+        
+      public void print() {
+
+            Node n= head;
+            while(n!=null)
+            {
+                System.out.println(n.data);
+                n=n.next;
+            }
+        }
+      
+      public void insertAt(int index,int d ){
+            Node n = new Node();
+            n.data = d;
+            n.next = null;
+            if(index==0)
+            {
+                insertAtStart(d);
+            }
+            else
+            {
+                Node temp = head;
+                for(int i=0;i<index-1;i++)
+                {
+                    temp=temp.next;
+                }
+                n.next=temp.next;
+                temp.next=n;
+            }
+        }
+      
+      public void insertAtStart(int d){
+
+             Node n = new Node();
+             n.data = d;
+             n.next = null;
+             n.next = head;
+             head = n;
+        }
+      
+      public void deleteAt(int index){
+
+            if(index==0)
+            {
+                Node temp = head;
+                head = temp.next;
+            }
+            else
+            {
+                Node temp = head;
+                Node n1 = new Node();
+                for (int i = 0; i < index - 1; i++) {
+                    temp = temp.next;
+                }
+                n1 = temp.next;
+                temp.next = n1.next;
+                n1 = null;
+            }
+        }
+      
+      public void search(int data) {
+            int flag = 0;
+            int i = 0;
+           Node temp = head;
+           while(temp!=null)
+           {
+               if (temp.data == data)
+               {
+                   flag = 1;
+                   break;
+               }
+               else
+               {
+                   temp = temp.next;
+                   i++;
+               }
+           }
+           if(flag == 1)
+               System.out.printf("element found at index: %d\n",i);
+           if(flag == 0)
+               System.out.print("element was not found\n");
+       }
+}
+public class Main {
+
+    public static void main(String[] args) {
+
+        LinkedList list = new LinkedList();
+
+               list.insert(5);
+               list.insert(6);
+               list.insert(7);
+               list.insert(8);
+               list.insertAt(0,4);
+               list.deleteAt(0);
+               list.print();
+               list.search(8);
+    }
+}
